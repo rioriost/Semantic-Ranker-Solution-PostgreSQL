@@ -57,7 +57,7 @@ In this demonstration you will use Bicep files to deploy the required resources.
     ```sql
     \i semantic_reranker_demo.sql
     ```
-    After vector retrieval and reranking, it returns the top 3 articles along with their relevance scores for the given query, "Latest analysis on presidential election."     
+    After vector retrieval and reranking, it returns the top 3 articles along with their relevance scores for the given query, "Latest news on artificial intelligence"     
 
        
 
