@@ -10,6 +10,8 @@ In our Solution Accelerator demonstration, we leverage a subset of the CNN-Daily
 ## Before you start
 * You need to have your own Azure subscription
 * Install [Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/install-azd?tabs=winget-windows%2Cbrew-mac%2Cscript-linux&pivots=os-linux)
+* Install [Azure CLI](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli)
+* Install az ml extension using `az extension add --name ml`
 
 ## Create the demonstration environment
 In this demonstration you will use Bicep files to deploy the required resources. The steps below guides you to deploy the Azure services necessary for completing this demonstration into your Azure subscription.
