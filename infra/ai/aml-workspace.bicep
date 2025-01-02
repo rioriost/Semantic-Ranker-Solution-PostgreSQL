@@ -10,6 +10,9 @@ param endpointName string
 @description('Unique name for the Key Vault instance.')
 param keyVaultName string = 'kv-${uniqueString(resourceGroup().id)}'
 
+@description('Name for the Log Analytics Workspace instance.')
+param logAnalyticsWSName string
+
 @description('Unique name for the Application Insights instance.')
 param appInsightsName string = 'appi-${workspaceName}-${uniqueString(resourceGroup().id)}'
 
@@ -29,12 +32,36 @@ resource keyVault 'Microsoft.KeyVault/vaults@2021-10-01' = {
   }
 }
 
+resource logAnalyticsWorkspace 'Microsoft.OperationalInsights/workspaces@2023-09-01' = {
+  name: logAnalyticsWSName
+  location: location
+  properties: {
+    sku: {
+      name: 'pergb2018'
+    }
+    features: {
+      enableLogAccessUsingOnlyResourcePermissions: true
+    }
+  }
+}
+
+resource workspaceName_Heartbeat 'Microsoft.OperationalInsights/workspaces/tables@2022-10-01' = {
+  parent: logAnalyticsWorkspace
+  name: 'Heartbeat'
+  properties: {
+    retentionInDays: 30
+  }
+}
+
 resource appInsights 'Microsoft.Insights/components@2020-02-02' = {
   name: appInsightsName
   location: location
   kind: 'web'
   properties: {
     Application_Type: 'web'
+    Flow_Type: 'Bluefield'
+    Request_Source: 'custom'
+    WorkspaceResourceId: logAnalyticsWorkspace.id
   }
 }
 

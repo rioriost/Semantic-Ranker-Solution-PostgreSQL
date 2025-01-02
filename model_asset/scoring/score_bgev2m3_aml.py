@@ -13,17 +13,19 @@ def init():
     """
     global model
     global tokenizer
+    global device
     # AZUREML_MODEL_DIR is an environment variable created during deployment.
     # It is the path to the model folder (./azureml-models/$MODEL_NAME/$VERSION)
     # Please provide your model's folder name if there is one
     #
+    device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
     model_path = os.path.join(os.getenv("AZUREML_MODEL_DIR"), "model")
     tokenizer_path = os.path.join(os.getenv("AZUREML_MODEL_DIR"),  "model")
     
     # deserialize the model file back into a sklearn model
     tokenizer = AutoTokenizer.from_pretrained(tokenizer_path)
     model = AutoModelForSequenceClassification.from_pretrained(model_path)
-    model.to('cuda')
+    model.to(device)
     model.eval()
     logging.info("Init complete")
 
@@ -38,7 +40,7 @@ def run(raw_data):
 
     pairs = json.loads(raw_data)["pairs"]
     with torch.no_grad():
-        inputs = tokenizer(pairs, padding=True, truncation=True, return_tensors='pt').to('cuda')
+        inputs = tokenizer(pairs, padding=True, truncation=True, return_tensors='pt').to(device)
         scores = model(**inputs, return_dict=True).logits.view(-1, ).float()
 
     logging.info("Request processed")

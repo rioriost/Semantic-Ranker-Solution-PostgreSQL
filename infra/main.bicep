@@ -50,6 +50,7 @@ param postgresAdminLoginName string // Set in main.parameters.json
 
 param AMLworkspaceName string // Set in main.parameters.json
 param AMLendpointName string // Set in main.parameters.json
+param AMLlogAnalyticsWSName string // Set in main.parameters.json
 param AMLdeploymentName string // Set in main.parameters.json
 
 @secure()
@@ -63,6 +64,7 @@ module AML 'ai/aml-workspace.bicep' = {
     location: location
     workspaceName: AMLworkspaceName
     endpointName: AMLendpointName
+    logAnalyticsWSName: AMLlogAnalyticsWSName
   }
 }
 

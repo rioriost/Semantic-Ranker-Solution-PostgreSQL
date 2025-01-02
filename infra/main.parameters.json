@@ -32,9 +32,11 @@
       "AMLendpointName": {
         "value": "${AML_ENDPOINT_NAME=rerankeramlws-endpt}"
       },
+      "AMLlogAnalyticsWSName": {
+        "value": "${AML_LOGANALYTICSWS_NAME=reranker-loganalyticsws}"
+      },
       "AMLdeploymentName": {
         "value": "${AML_DEPLOYMENT_NAME=bgev2m3-v1}"
       }
-      
     }
 }
