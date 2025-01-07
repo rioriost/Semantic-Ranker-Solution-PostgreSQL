@@ -71,13 +71,37 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2021-04-01' = {
   sku: {
     name: 'Standard_LRS'
   }
+  identity: {
+    type: 'SystemAssigned'
+  }
   kind: 'StorageV2'
   properties: {
     accessTier: 'Hot'
+    allowSharedKeyAccess: false
   }
 }
 
-resource amlWorkspace 'Microsoft.MachineLearningServices/workspaces@2021-07-01' = {
+/*
+resource SBDCroleAssignment 'Microsoft.Authorization/roleAssignments@2020-04-01-preview' = {
+  name: guid(storageAccount.id, 'Storage Blob Data Contributor')
+  scope: storageAccount
+  properties: {
+    roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', 'ba92f5b4-2d11-453d-a403-e96b0029c9fe')
+    principalId: storageAccount.identity.principalId
+  }
+}
+
+resource SFPCroleAssignment 'Microsoft.Authorization/roleAssignments@2020-04-01-preview' = {
+  name: guid(storageAccount.id, 'Storage File Data Privileged Contributor')
+  scope: storageAccount
+  properties: {
+    roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', '69566ab7-960f-475b-8e7c-b3118f30c6bd')
+    principalId: storageAccount.identity.principalId
+  }
+}
+*/
+
+resource amlWorkspace 'Microsoft.MachineLearningServices/workspaces@2024-10-01-preview' = {
   name: workspaceName
   location: location
   identity: {type: 'SystemAssigned'}
@@ -86,6 +110,7 @@ resource amlWorkspace 'Microsoft.MachineLearningServices/workspaces@2021-07-01' 
     keyVault: keyVault.id
     applicationInsights: appInsights.id
     storageAccount: storageAccount.id
+    systemDatastoresAuthMode: 'Identity'
   }
 }
 
