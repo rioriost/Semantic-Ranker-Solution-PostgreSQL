@@ -5,6 +5,7 @@ Semantic Ranker Solution Accelerator を使用すると、Azure Database for Pos
 このソリューションアクセラレーターには、以下の機能が含まれています：
 * 自動デプロイメントスクリプト により、セマンティックランカーモデルを Azure Machine Learning Inference Endpoint としてプロビジョニング
 * PostgreSQL の SQL UDF（ユーザー定義関数） により、SQL クエリ内でランカーモデルを統合
+
 このソリューションアクセラレーターを使用するには、[azure_ai](https://learn.microsoft.com/en-us/azure/postgresql/flexible-server/generative-ai-azure-overview) 拡張機能が必要です。
 
 ## セマンティックランカーソリューションのデモについて
