@@ -3,8 +3,8 @@
 情報検索パイプラインの精度は、高度な Retrieval Augmented Generation (RAG) アプリケーションの品質において重要な役割を果たします。
 Semantic Ranker Solution Accelerator を使用すると、Azure Database for PostgreSQL に セマンティックランカーモデル を拡張し、PostgreSQL の SQL クエリ内で直接利用することで、ベクター検索結果の精度を向上させることができます。
 このソリューションアクセラレーターには、以下の機能が含まれています：
-	•	自動デプロイメントスクリプト により、セマンティックランカーモデルを Azure Machine Learning Inference Endpoint としてプロビジョニング
-	•	PostgreSQL の SQL UDF（ユーザー定義関数） により、SQL クエリ内でランカーモデルを統合
+* 自動デプロイメントスクリプト により、セマンティックランカーモデルを Azure Machine Learning Inference Endpoint としてプロビジョニング
+* PostgreSQL の SQL UDF（ユーザー定義関数） により、SQL クエリ内でランカーモデルを統合
 このソリューションアクセラレーターを使用するには、[azure_ai](https://learn.microsoft.com/en-us/azure/postgresql/flexible-server/generative-ai-azure-overview) 拡張機能が必要です。
 
 ## セマンティックランカーソリューションのデモについて
