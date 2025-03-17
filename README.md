@@ -51,13 +51,23 @@ In this demonstration you will use Bicep files to deploy the required resources.
     psql --host=$AZURE_POSTGRES_HOST --port=5432 --username=$AZURE_POSTGRES_USERNAME --dbname=$AZURE_POSTGRES_DB_NAME
     ```
 
+    If the above command fails, try the following command:
+    ```bash
+    azd env get-values | awk '{print "export " $0}' > azd_env
+    source azd_env
+    psql --host=$AZURE_POSTGRES_HOST --port=5432 --username=$AZURE_POSTGRES_USERNAME --dbname=$AZURE_POSTGRES_DB_NAME
+    ```
+
 7. Create and setup necessary extensions
     ```sql
     \i setup_azure_ai.sql
     ```
    You will be prompted to enter OpenAI endpoint and subscription key and Azure Machine Learning scoring endpoint and key for the deployed embedding model and reranker model, respectively.
    >
-   > You can find the endpoint and the keys for your Azure OpenAI resource under Resource Management > Keys and Endpoints in the the Azure OpenAI resource. Similarly, in the Azure Machine Learning studio, under Endpoints > Pick your endpoint > Consume you can find the endpoint URI and Key for the online endpoint.
+   > You can find the endpoint and the keys for your Azure OpenAI resource under Resource Management
+   > Keys and Endpoints in the the Azure OpenAI resource. Similarly, in the Azure Machine Learning studio, under Endpoints
+   > Pick your endpoint
+   > Consume you can find the endpoint URI and Key for the online endpoint.
 
 9. Execute demo
     ```sql
