@@ -76,6 +76,13 @@ Semantic Ranker Solution Accelerator を使用すると、Azure Database for Pos
     psql --host=$AZURE_POSTGRES_HOST --port=5432 --username=$AZURE_POSTGRES_USERNAME --dbname=$AZURE_POSTGRES_DB_NAME
     ```
 
+    もし上記のコマンドが失敗する場合は、以下を試してください:
+    ```bash
+    azd env get-values | awk '{print "export " $0}' > azd_env
+    source azd_env
+    psql --host=$AZURE_POSTGRES_HOST --port=5432 --username=$AZURE_POSTGRES_USERNAME --dbname=$AZURE_POSTGRES_DB_NAME
+    ```
+
 7. 必要な拡張機能を作成しセットアップする
 
     ```sql
