@@ -82,7 +82,7 @@ Semantic Ranker Solution Accelerator を使用すると、Azure Database for Pos
 
 7. Azure Machine Learningのアクセス情報を取得する
 
-  Azure OpenAIと同様に、リソースグループのリストから Azure Machine Learning workspace をポイントし、[Lauch Studio]をクリックします。
+  Azure OpenAIと同様に、リソースグループのリストから Azure Machine Learning workspace をポイントし、[Launch Studio]をクリックします。
   ![Launch Studio](images/azureml_01_jp.png)
 
   左のブレードから[エンドポイント]をクリックします。
