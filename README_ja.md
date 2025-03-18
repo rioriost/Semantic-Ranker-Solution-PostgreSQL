@@ -67,9 +67,39 @@ Semantic Ranker Solution Accelerator を使用すると、Azure Database for Pos
 
    これにより、Hugging Face から リランカーモデル をダウンロードし、Azure Machine Learning Workspace にデプロイします。
 
+## アクセス情報の取得
+
+6. Azure OpenAIのアクセス情報を取得する
+
+  [Azureポータル](https://portal.azure.com/)にアクセスし、作成されたリソースグループのリストから Azure OpenAI をポイントします。
+  ![Azure OpenAIリソース](images/openai_01_jp.png)
+
+  左のブレードの[概要(Overview)]から、エンドポイントもしくはマネージキーをポイントします。
+  ![エンドポイントとキーへのリンク](images/openai_02_jp.png)
+
+  表示されたエンドポイントとキーをコピーし、テキストエディタなどで一時的に保存します。
+  ![エンドポイントとキー](images/openai_03_jp.png)
+
+7. Azure Machine Learningのアクセス情報を取得する
+
+  Azure OpenAIと同様に、リソースグループのリストから Azure Machine Learning workspace をポイントし、[Lauch Studio]をクリックします。
+  ![Launch Studio](images/azureml_01_jp.png)
+
+  左のブレードから[エンドポイント]をクリックします。
+  ![エンドポイント](images/azureml_02_jp.png)
+
+  リアルタイムエンドポイントのリストから、作成したエンドポイントをポイントします。
+  ![リランカーエンドポイント](images/azureml_03_jp.png)
+
+  [使用]タブに切り替えます。
+  ![使用タブ](images/azureml_04_jp.png)
+
+  表示されたエンドポイントとキーをコピーし、テキストエディタなどで一時的に保存します。
+  ![使用タブ](images/azureml_05_jp.png)
+
 ## Azure Database for PostgreSQL Flexible Server におけるセマンティックリランキング
 
-6. データベースのホスト名、ユーザー名、およびデータベース名を指定して、データベースに接続します
+8. データベースのホスト名、ユーザー名、およびデータベース名を指定して、データベースに接続します
 
     ```bash
     # azd 環境から環境変数を読み込む
@@ -85,20 +115,16 @@ Semantic Ranker Solution Accelerator を使用すると、Azure Database for Pos
     psql --host=$AZURE_POSTGRES_HOST --port=5432 --username=$AZURE_POSTGRES_USERNAME --dbname=$AZURE_POSTGRES_DB_NAME
     ```
 
-7. 必要な拡張機能を作成しセットアップする
+9. 必要な拡張機能を作成しセットアップする
 
     ```sql
     \i setup_azure_ai.sql
     ```
 
    OpenAI エンドポイント と サブスクリプションキー、および Azure Machine Learning のスコアリングエンドポイント と キー（デプロイ済みの埋め込みモデルおよびリランカーモデル用）を入力するよう求められます。
-   >
-   > You can find the endpoint and the keys for your Azure OpenAI resource under Resource Management
-   > Keys and Endpoints in the the Azure OpenAI resource. Similarly, in the Azure Machine Learning studio, under Endpoints
-   > Pick your endpoint
-   > Consume you can find the endpoint URI and Key for the online endpoint.
+   手順6・7で保存した項目をそれぞれ入力します。
 
-9. デモの実行
+10. デモの実行
 
     ```sql
     \i semantic_reranker_demo.sql
