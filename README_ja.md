@@ -138,3 +138,16 @@ Semantic Ranker Solution Accelerator を使用すると、Azure Database for Pos
     ```
 
     ベクター検索とリランキングの後、「人工知能に関する最新ニュース」 というクエリに対して、上位 3 件の記事 とその 関連性スコア を返します。
+
+## 再デプロイ時の注意点
+
+`azd down` を実行することでデプロイされたリソースは削除されますが、下記について注意が必要です。
+
+Azure MLリソースは14日間保持されるようになっているため、同じ名称で再度デプロイするには、ワークスペースを完全に削除する必要があります。
+[論理的な削除中のワークスペース データを回復する](https://learn.microsoft.com/ja-jp/azure/machine-learning/concept-soft-delete?view=azureml-api-2)
+
+あるいは`az`コマンドでpurgeできます。
+
+```bash
+az ml workspace purge --name <workspace-name> --resource-group <resource-group>
+```
