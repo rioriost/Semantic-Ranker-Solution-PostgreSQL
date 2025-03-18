@@ -1,4 +1,4 @@
-## Azure Database for PostgreSQL Flexible Server における セマンティックランキング
+# Azure Database for PostgreSQL Flexible Server における セマンティックランキング
 
 情報検索パイプラインの精度は、高度な Retrieval Augmented Generation (RAG) アプリケーションの品質において重要な役割を果たします。
 Semantic Ranker Solution Accelerator を使用すると、Azure Database for PostgreSQL に セマンティックランカーモデル を拡張し、PostgreSQL の SQL クエリ内で直接利用することで、ベクター検索結果の精度を向上させることができます。
@@ -49,7 +49,13 @@ Semantic Ranker Solution Accelerator を使用すると、Azure Database for Pos
     azd env new
     ```
 
-   リソースグループに使用する名前を入力してください。これにより、`.azure` フォルダー内に新しいフォルダーが作成され、以降の `azd` コマンドの呼び出しで アクティブな環境 として設定されます。
+    リソースグループに使用する名前を入力してください。これにより、`.azure` フォルダー内に新しいフォルダーが作成され、以降の `azd` コマンドの呼び出しで アクティブな環境 として設定されます。
+
+    このソリューションアクセラレータに続けて[GraphRAGソリューションアクセラレータ](https://github.com/rioriost/graphrag-legalcases-postgres/blob/main/README_ja.md)を実施する場合、下記コマンドを実行してAzure OpenAIのキャパシティを下げておいてください。
+
+    ```bash
+    sed -i '' 's/capacity: 300/capacity: 120/' infra/ai/openai-service.bicep
+    ```
 
 4. リソースのプロビジョニング
 
@@ -123,6 +129,7 @@ Semantic Ranker Solution Accelerator を使用すると、Azure Database for Pos
 
    OpenAI エンドポイント と サブスクリプションキー、および Azure Machine Learning のスコアリングエンドポイント と キー（デプロイ済みの埋め込みモデルおよびリランカーモデル用）を入力するよう求められます。
    手順6・7で保存した項目をそれぞれ入力します。
+   もし、続けて"graphrag-legalcases-postgres"ソリューションアクセラレータを実施する場合は、"graphrag-legalcases-postgres"が完了するまで、アクセス情報を保存したままにしておいてください。
 
 10. デモの実行
 
@@ -131,13 +138,3 @@ Semantic Ranker Solution Accelerator を使用すると、Azure Database for Pos
     ```
 
     ベクター検索とリランキングの後、「人工知能に関する最新ニュース」 というクエリに対して、上位 3 件の記事 とその 関連性スコア を返します。
-
-## 再デプロイ時の注意点
-
-`azd down` を実行することでデプロイされたリソースは削除されますが、下記2点について注意が必要です。
-
-削除したAzure AIリソースを48時間以内に同じ名称で再度デプロイするには、削除したリソースを消去する必要があります。
-[削除された Azure AI サービス リソースの復旧または消去](https://learn.microsoft.com/ja-jp/azure/ai-services/recover-purge-resources?tabs=azure-portal)
-
-同様にAzure MLリソースは14日間保持されるようになっているため、同じ名称で再度デプロイするには、ワークスペースを完全に削除する必要があります。
-[論理的な削除中のワークスペース データを回復する](https://learn.microsoft.com/ja-jp/azure/machine-learning/concept-soft-delete?view=azureml-api-2)
