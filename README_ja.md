@@ -23,7 +23,9 @@ Semantic Ranker Solution Accelerator を使用すると、Azure Database for Pos
 * [Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/install-azd?tabs=winget-windows%2Cbrew-mac%2Cscript-linux&pivots=os-linux)のインストール
 * [Azure CLI](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli) のインストール
 * `az extension add --name ml` による az ml 拡張機能のインストール
-* デプロイするリージョンに十分な コンピュートクォータ が利用可能であることを確認してください。必要なクォータは Standard_NC24ads_A100_v4 の 24 CPU です ([Azure Machine Learning を使用するリソースのクォータと制限の管理と引き上げ](https://learn.microsoft.com/ja-jp/azure/machine-learning/how-to-manage-quotas?view=azureml-api-2))。
+* デプロイするリージョンに十分な コンピュートクォータ が利用可能であることを確認してください。必要なクォータは Standard_NC24ads_A100_v4 の 24 CPU です。
+[Azure Machine Learningのクォータの要求方法](how_to_request_quota_jp.md)
+([Azure Machine Learning を使用するリソースのクォータと制限の管理と引き上げ](https://learn.microsoft.com/ja-jp/azure/machine-learning/how-to-manage-quotas?view=azureml-api-2))
 
 ## デモ環境の作成
 
